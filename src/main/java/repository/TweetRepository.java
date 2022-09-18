@@ -2,9 +2,9 @@ package repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import com.model.Tweet;
-import com.model.User;
 
 public class TweetRepository {
     
@@ -20,7 +20,21 @@ public class TweetRepository {
         } catch (Exception e) {
             return false;
         }
-    
+    }
+
+
+    public static ResultSet showAllTweets(int id){
+        final String showAllTweet = "SELECT tweet FROM tweets where user_id = ?;";
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement statement = connection.prepareStatement(showAllTweet);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
     
 }

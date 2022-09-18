@@ -1,5 +1,6 @@
 package com.example.login;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -18,9 +19,9 @@ public class App {
 
     public static void tweet(int id) throws SQLException{
         System.out.println("\n------------------------");
-        System.out.println("Press '1' to write a tweet ");
-        System.out.println("Press '2' to show all tweets ");
-        System.out.println(" press '3' to quit ");
+        System.out.println("Press '1' to write a tweet ");
+        System.out.println("Press '2' to show all tweets ");
+        System.out.println("press '3' to quit ");
         switch(scanner.nextInt()){
             case 1:
                 System.out.println("Enter your tweet : ");
@@ -32,9 +33,15 @@ public class App {
                 TweetService.insertTweet(tweet);
                 break;
             case 2:
-            
+                System.out.println("printing all tweets ... ");
+                ResultSet result = TweetService.showAllTweets(id);
+                while(result.next()){
+                    System.out.println(result.getString("tweet"));
+                }
+                break;
             case 3:
                 flag2 = false;
+                break;
 
         }
 
